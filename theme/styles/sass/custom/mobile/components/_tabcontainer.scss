@@ -1,0 +1,35 @@
+/* ==========================================================================
+   Tabcontainer
+
+   Default Mendix Tabcontainer for Mobile 
+========================================================================== */
+.profile-phone,
+.profile-tablet {
+	.mx-tabcontainer-tabs {
+		/* Styles here */
+		li {
+			/* Styles here */
+			a {
+				/* Styles here */
+				&:hover,
+				&:focus,
+				&.active {
+					/* Styles here */
+				}
+			}
+			&.active a {
+
+  				&:after,
+  				&:before {
+  					
+  				}
+  				&:after {
+  					
+  				}
+  				&:before {
+  					
+  				}
+			}
+		}
+	}
+}

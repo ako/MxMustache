@@ -1,0 +1,72 @@
+{ __UUID__=null,
+  FactuurId=64,
+  Kenmerk=1.64,
+  FactuurTekst=null,
+  __FileName__=64,
+  Opdracht_Factuur=[
+    { OpdrachtType=Inhuur_per_uur,
+      Tarief=60.00000000,
+      EindDatumTijd=Mon Jan 04 17:00:00 CET 2016,
+      Opdrachten_Klanten={Huisnummer=1, Voornaam=anja, Achternaam=asiel, KlantId=1, Bedrijfsnaam=Hoed1, Straat=kerkstraat, Postcode=2588aa, Woonplaats=den haag},
+      OpdrachtId=2,
+      StartDatumTijd=Mon Jan 04 08:00:00 CET 2016,
+      AantalKilometers=0,
+      Opdracht_Factuur=[],
+      Uren=8.00000000,
+      KilometerVergoeding=0.19000000},
+    { OpdrachtType=Inhuur_per_uur,
+      Tarief=60.00000000,
+      EindDatumTijd=Tue Jan 05 17:00:00 CET 2016,
+      Opdrachten_Klanten=null,
+      OpdrachtId=3, StartDatumTijd=Tue Jan 05 08:00:00 CET 2016, AantalKilometers=0,
+      Opdracht_Factuur=[], Uren=8.00000000, KilometerVergoeding=0.19000000},
+    { OpdrachtType=Inhuur_per_uur, Tarief=75.00000000, EindDatumTijd=Wed Jan 06 23:59:00 CET 2016,
+      Opdrachten_Klanten=null, OpdrachtId=4, StartDatumTijd=Wed Jan 06 17:00:00 CET 2016,
+      AantalKilometers=0, Opdracht_Factuur=[], Uren=7.00000000, KilometerVergoeding=0.19000000},
+    { OpdrachtType=Dienst, Tarief=250.00000000, EindDatumTijd=Thu Jan 07 17:00:00 CET 2016,
+      Opdrachten_Klanten=null, OpdrachtId=5, StartDatumTijd=Thu Jan 07 07:00:00 CET 2016,
+      AantalKilometers=50, Opdracht_Factuur=[], Uren=0E-8, KilometerVergoeding=0.19000000}
+  ],
+  Name=Factuur_1.64_201601031403,
+  TotaalBedrag=1485.00000000,
+  DeleteAfterDownload=false,
+  FactuurDatum=Sun Jan 03 14:03:33 CET 2016,
+  Toelichting=n.v.t., HasContents=false, FileID=64, Naam=Factuur_1.64_201601031403, Betreft=factuur (4x)}
+
+
+Factuur gericht aan:
+
+{{#Opdracht_Factuur}}
+{{-first}}
+{{Opdrachten_Klanten.Bedrijfsnaam}}
+tav {{Opdrachten_Klanten.Voornaam}} {{Opdrachten_Klanten.Achternaam}}
+{{Opdrachten_Klanten.Straat}} {{Opdrachten_Klanten.Huisnummer}}
+{{Opdrachten_Klanten.Postcode}} {{Opdrachten_Klanten.Plaats}}
+{{/-first}}
+{{/Opdracht_Factuur}}
+
+
+Datum: {{FactuurDatum}}
+Factuurnummer: {{Kenmerk}}
+
+Betreft: {{Betreft}}
+
+
+| Datum | Tarief / uur | Aantal uren | Tarief / dienst | Aantal diensten | Tarief / Km | Km |
+| :--------- | --------: | -----------: | ----------: | ----------: | ---------: | ----------: |
+{{#Opdracht_Factuur}}
+| {{StartDatumTijd}} | {{Tarief}} | {{Uren}} |  {{TariefDienst}} | | {{KilometerVergoeding}} | {{AantalKilometers}} |
+{{/Opdracht_Factuur}}
+| Totaal | {{TotaalBedrag}} |
+
+Toelichting factuur: {{Toelichting}}
+
+
+
+Gelieve deze factuur te voldoen op rekeningnummer NL ter name van dokter, binnen 14 dagen onder vermelding van factuurnummer.
+
+
+
+Uw Dokter,
+Adres,
+Kvk: 123
