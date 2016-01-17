@@ -4,7 +4,6 @@ import com.mendix.core.Core;
 import com.mendix.core.objectmanagement.member.MendixEnum;
 import com.mendix.core.objectmanagement.member.MendixObjectReference;
 import com.mendix.core.objectmanagement.member.MendixObjectReferenceSet;
-import com.mendix.core.objectmanagement.meta.metamodel.MetaAssociation;
 import com.mendix.logging.ILogNode;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixIdentifier;
@@ -107,14 +106,12 @@ public class MxObjectToHashmapConverter {
         Iterator d = dmac.iterator();
         while (d.hasNext()) {
             IMetaAssociation ma = (IMetaAssociation) d.next();
-            LOGGER.info("ma: " + ma.toString());
 
             List<IMendixObject> list = Core.retrieveByPath(context, view, ma.getName());
             Iterator<IMendixObject> it = list.iterator();
             ArrayList ar = new ArrayList();
             while (it.hasNext()) {
                 IMendixObject obj2 = it.next();
-                LOGGER.info("it: " + obj2.toString());
                 Object value = obj2.getId();
                 if (value != null) {
                     value = identifierToHashMap(context, (IMendixIdentifier) value, alreadySeen, useServiceUrls, maxDepth);

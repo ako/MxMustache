@@ -2,6 +2,7 @@ package mxmustache.template;
 
 /**
  * Created by ako on 1/2/2016.
+ * Code copied from REST services module.
  */
 
 import java.io.UnsupportedEncodingException;

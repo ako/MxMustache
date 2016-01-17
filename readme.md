@@ -29,6 +29,8 @@ Uses a CarList object with associations to 10 Cars. Result is a CSV string.
     {{Brand}},{{Model}},{{HasTurbo}},{{CarId}},{{Price}},{{Doors}},{{Color}},{{DateIntroduction}}
     {{/Car_CarList}}
 
+You can find an example microflow on [Mendix model share][9]: [Test csv template multiple objects][5].
+
 ### One to many association using markdown to create an Html table
 
 This template uses markdown to create an html table. Includes JMustache extensions to specify formatting: money, dd-MM-yyyy:
@@ -40,6 +42,9 @@ This template uses markdown to create an html table. Includes JMustache extensio
     {{/Car_CarList}}
 
 The resulting html snippet can be used with the document generator to generate a pdf.
+
+You can find an example microflow on [Mendix model share][9]: [Test markdown template multiple objects][6]. 
+You can find an example with pdf generation here: [Test markdown pdf template multiple objects][10].
 
 ### Generate JSON document with one to many association
 
@@ -58,6 +63,8 @@ You can use templating to generate JSON strings:
     },
     {{/Car_CarList}}
     ]
+
+You can find an example microflow on [Mendix model share][9]: [Test json template multiple objects][7]
 
 ### Generate XML document with one to many association
 
@@ -78,9 +85,7 @@ You can also generate XML in a similar fashion:
     {{/Car_CarList}}
     </Cars>
 
-Example microflow:
-
-<iframe width='100%' height='491px' frameborder='0' src='https://modelshare.mendix.com/models/6b841874-4f28-4509-ae21-123c7587263b/test-xml-template-multiple-objects?embed=true' allowfullscreen>Xml MxMustache example</iframe>
+You can find an example microflow on [Mendix model share][9]: [Test xml template multiple objects][8]
 
 ## History
 
@@ -94,3 +99,5 @@ Example microflow:
  [6]: https://modelshare.mendix.com/models/745ecbeb-7270-4a57-8676-6394fcfb6cf4/test-markdown-template-multiple-objects
  [7]: https://modelshare.mendix.com/models/bcd40b79-05c2-4e61-857b-f94c3eedcc6b/test-json-template-multiple-objects
  [8]: https://modelshare.mendix.com/models/6b841874-4f28-4509-ae21-123c7587263b/test-xml-template-multiple-objects
+ [9]: https://modelshare.mendix.com/
+ [10]: https://modelshare.mendix.com/models/5f010314-0f71-47c9-a8a7-9baef004ef3f/test-markdown-pdf-template-multiple-objects

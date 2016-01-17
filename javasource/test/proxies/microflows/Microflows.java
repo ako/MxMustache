@@ -15,6 +15,19 @@ public class Microflows
 {
 	// These are the microflows for the Test module
 
+	public static void testCsvTemplateMultipleObjects(IContext context)
+	{
+		try
+		{
+			Map<String, Object> params = new HashMap<String, Object>();
+			Core.execute(context, "Test.TestCsvTemplateMultipleObjects", params);
+		}
+		catch (CoreException e)
+		{
+			throw new MendixRuntimeException(e);
+		}
+	}
+
 	public static void testJsonTemplateMultipleObjects(IContext context)
 	{
 		try
@@ -28,12 +41,12 @@ public class Microflows
 		}
 	}
 
-	public static void testMarkdownTemplateMultipleObjects(IContext context)
+	public static void testMarkdownPdfTemplateMultipleObjects(IContext context)
 	{
 		try
 		{
 			Map<String, Object> params = new HashMap<String, Object>();
-			Core.execute(context, "Test.TestMarkdownTemplateMultipleObjects", params);
+			Core.execute(context, "Test.TestMarkdownPdfTemplateMultipleObjects", params);
 		}
 		catch (CoreException e)
 		{
@@ -41,12 +54,12 @@ public class Microflows
 		}
 	}
 
-	public static void testTemplateMultipleObjects(IContext context)
+	public static void testMarkdownTemplateMultipleObjects(IContext context)
 	{
 		try
 		{
 			Map<String, Object> params = new HashMap<String, Object>();
-			Core.execute(context, "Test.TestTemplateMultipleObjects", params);
+			Core.execute(context, "Test.TestMarkdownTemplateMultipleObjects", params);
 		}
 		catch (CoreException e)
 		{
