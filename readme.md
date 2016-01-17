@@ -5,7 +5,7 @@ extensions for formatting. For formatting it uses [PegDown][3].
 
 ## Examples
 
-# Basic single object
+### Basic single object
 
 Uses a single object of instance Car. Template refers to the attributes in the entity. Example can be found in the tests module:
 
@@ -18,7 +18,7 @@ Uses a single object of instance Car. Template refers to the attributes in the e
     Color: {{Color}}
     DateIntroduction: {{DateIntroduction}}
 
-## One to many association
+### One to many association
 
 Uses a CarList object with associations to 10 Cars. Result is a CSV string. 
 
@@ -27,7 +27,7 @@ Uses a CarList object with associations to 10 Cars. Result is a CSV string.
     {{Brand}},{{Model}},{{HasTurbo}},{{CarId}},{{Price}},{{Doors}},{{Color}},{{DateIntroduction}}
     {{/Car_CarList}}
 
-## One to many association using markdown to create an Html table
+### One to many association using markdown to create an Html table
 
 This template uses markdown to create an html table. Includes JMustache extensions to specify formatting: money, dd-MM-yyyy:
 
