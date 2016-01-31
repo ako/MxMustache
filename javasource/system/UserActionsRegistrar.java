@@ -125,7 +125,9 @@ public class UserActionsRegistrar implements EventHandler
 			component.actionRegistry().registerUserAction(communitycommons.actions.XSSSanitize.class);
 			component.actionRegistry().registerUserAction(communitycommons.actions.YearsBetween.class);
 			component.actionRegistry().registerUserAction(mxmustache.actions.FillTemplate.class);
+			component.actionRegistry().registerUserAction(mxmustache.actions.SendEmail.class);
 			component.actionRegistry().registerUserAction(system.actions.VerifyPassword.class);
+			component.actionRegistry().registerUserAction(test.actions.StartSmtpMock.class);
 			component.actionRegistry().registerUserAction(unittesting.actions.FindAllUnitTests.class);
 			component.actionRegistry().registerUserAction(unittesting.actions.ReportStepJava.class);
 			component.actionRegistry().registerUserAction(unittesting.actions.RunAllUnitTestsWrapper.class);

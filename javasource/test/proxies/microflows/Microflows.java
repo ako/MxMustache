@@ -15,12 +15,38 @@ public class Microflows
 {
 	// These are the microflows for the Test module
 
+	public static void mF_Gmail(IContext context)
+	{
+		try
+		{
+			Map<String, Object> params = new HashMap<String, Object>();
+			Core.execute(context, "Test.MF_Gmail", params);
+		}
+		catch (CoreException e)
+		{
+			throw new MendixRuntimeException(e);
+		}
+	}
+
 	public static void testCsvTemplateMultipleObjects(IContext context)
 	{
 		try
 		{
 			Map<String, Object> params = new HashMap<String, Object>();
 			Core.execute(context, "Test.TestCsvTemplateMultipleObjects", params);
+		}
+		catch (CoreException e)
+		{
+			throw new MendixRuntimeException(e);
+		}
+	}
+
+	public static void testEmailMarkdownTemplateMultipleObjects(IContext context)
+	{
+		try
+		{
+			Map<String, Object> params = new HashMap<String, Object>();
+			Core.execute(context, "Test.TestEmailMarkdownTemplateMultipleObjects", params);
 		}
 		catch (CoreException e)
 		{
