@@ -47,7 +47,7 @@ public class MxObjectToHashmapConverter {
 
         if (alreadySeen.contains(id.toLong())) {
             LOGGER.warn("ID already seen: " + id.toLong() + ", skipping serialization");
-            return null;
+            //return null;
         }
         alreadySeen.add(id.toLong());
 
