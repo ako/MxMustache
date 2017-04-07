@@ -1,15 +1,20 @@
 package unittesting;
 
 import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipException;
+import java.util.zip.ZipFile;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.junit.Test;
@@ -19,16 +24,17 @@ import org.junit.runners.JUnit4;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
 
-import unittesting.proxies.TestSuite;
-import unittesting.proxies.UnitTest;
-import unittesting.proxies.UnitTestResult;
-
 import com.mendix.core.Core;
 import com.mendix.core.CoreException;
 import com.mendix.logging.ILogNode;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IDataType;
-import communitycommons.XPath;
+import com.mendix.systemwideinterfaces.core.IMendixObject;
+
+import objecthandling.XPath;
+import unittesting.proxies.TestSuite;
+import unittesting.proxies.UnitTest;
+import unittesting.proxies.UnitTestResult;
 
 /**
  * @author mwe
@@ -51,11 +57,9 @@ public class TestManager
 		}
 	}
 
-
-	private static final String	TEST_MICROFLOW_PREFIX_1	= "Test";
 	private static final String	TEST_MICROFLOW_PREFIX_2	= "UT_";
 
-	static final String	CLOUD_SECURITY_ERROR	= "Failed to find JUnit test classes or methods. Note that java unit tests cannot be run with default cloud security. \n\n";
+	static final String	CLOUD_SECURITY_ERROR = "Unable to find JUnit test classes or methods. \n\n";
 	
 	private static TestManager	instance;
 	public static ILogNode LOG = Core.getLogger("UnitTestRunner");
@@ -75,7 +79,7 @@ public class TestManager
 	}
 
 
-	private static Class<?>[] getUnitTestClasses(TestSuite testRun) {
+	private static Class<?>[] getUnitTestClasses(TestSuite testRun) throws ZipException, IOException {
 		if (!classCache.containsKey(testRun.getModule().toLowerCase())) {
 
 			ArrayList<Class<?>> classlist = getClassesForPackage(testRun.getModule());
@@ -154,13 +158,15 @@ public class TestManager
 		//Context without transaction!
 		IContext context = Core.createSystemContext();
 		
-		for(TestSuite suite : XPath.create(context, TestSuite.class).all()) {
-			suite.setResult(null);
-			suite.commit();
+		List<IMendixObject> testsuites = Core.retrieveXPathQuery(context,"//" +TestSuite.entityName);
+		
+		for(IMendixObject suite : testsuites) {
+			suite.setValue(context, TestSuite.MemberNames.Result.toString(), null);;	
 		}
+		Core.commit(context, testsuites);
 
-		for(TestSuite suite : XPath.create(context, TestSuite.class).all()) {
-			runTestSuite(context, suite);
+		for(IMendixObject suite : testsuites) {
+			runTestSuite(context, TestSuite.load(context, suite.getId()));
 		}
 
 		LOG.info("Finished testrun on all suites");
@@ -189,21 +195,23 @@ public class TestManager
 		/**
 		 * Run java unit tests
 		 */
-		Class<?>[] clazzez = null;
-		try {
-			clazzez = getUnitTestClasses(testSuite);
+		if(unittesting.proxies.constants.Constants.getFindJUnitTests())
+		{
+			Class<?>[] clazzez = null;
+			try {
+				clazzez = getUnitTestClasses(testSuite);
+			}
+			catch(Exception e) {
+				LOG.error(CLOUD_SECURITY_ERROR + e.getMessage(), e);
+			}
+	
+			if (clazzez != null && clazzez.length > 0) {
+				JUnitCore junit = new JUnitCore();
+				junit.addListener(new UnitTestRunListener(context, testSuite));
+	
+				junit.run(clazzez);
+			}
 		}
-		catch(Exception e) {
-			LOG.error(CLOUD_SECURITY_ERROR + e.getMessage(), e);
-		}
-
-		if (clazzez != null && clazzez.length > 0) {
-			JUnitCore junit = new JUnitCore();
-			junit.addListener(new UnitTestRunListener(context, testSuite));
-
-			junit.run(clazzez);
-		}
-
 		/** 
 		 * Run microflow tests
 		 * 
@@ -244,8 +252,16 @@ public class TestManager
 	{
 		List<String> mfnames = new ArrayList<String>();
 
-		String basename1 = (testRun.getModule() + "." + TEST_MICROFLOW_PREFIX_1).toLowerCase();
-		String basename2 = (testRun.getModule() + "." + TEST_MICROFLOW_PREFIX_2).toLowerCase();
+		if(testRun.getPrefix1() == null) {
+			testRun.setPrefix1("Test_");
+		}
+		if(testRun.getPrefix2() == null) {
+			testRun.setPrefix2("UT_");
+		}
+			
+		
+		String basename1 = (testRun.getModule() + "." + testRun.getPrefix1()).toLowerCase();
+		String basename2 = (testRun.getModule() + "." + testRun.getPrefix2()).toLowerCase();
 		
 		//Find microflownames
 		for (String mf : Core.getMicroflowNames()) 
@@ -403,28 +419,30 @@ public class TestManager
 		}
 	}
 
-	private static void processDirectory(File directory, String pkgname, ArrayList<Class<?>> classes) {
+	private static void processProjectJar(File projectJar, String pkgname, ArrayList<Class<?>> classes) throws IOException  { 
 		// Get the list of the files contained in the package
-		String[] files = directory.list();
-		if (files != null) 
-			for (int i = 0; i < files.length; i++) {
-				String fileName = files[i];
-				String className = null;
-				// we are only interested in .class files
-				if (fileName.endsWith(".class")) {
-					// removes the .class extension
-					className = pkgname + '.' + fileName.substring(0, fileName.length() - 6);
-				}
-				if (className != null) {
-					Class<?> clazz = loadClass(className);
-					if (isProperUnitTest(clazz))
-						classes.add(clazz);
-				}
-				File subdir = new File(directory, fileName);
-				if (subdir.isDirectory()) {
-					processDirectory(subdir, pkgname + '.' + fileName, classes);
-				}
+		
+		ZipFile zipFile = new ZipFile(projectJar);
+		Enumeration<? extends ZipEntry> entries = zipFile.entries();
+		System.out.println("Starting processProjec");
+		while(entries.hasMoreElements()){
+			ZipEntry zipEntry = entries.nextElement();
+			String fileName = zipEntry.getName();
+
+			String className = null;
+			
+			if (fileName.startsWith(pkgname) && fileName.endsWith(".class")) {
+				fileName = fileName.replace("/", ".");
+				// removes the .class extension
+				className = fileName.substring(0, fileName.length() - 6);
 			}
+			if (className != null) {
+				Class<?> clazz = loadClass(className);
+				if (isProperUnitTest(clazz))
+					classes.add(clazz);
+			}
+		}
+		zipFile.close();
 	}
 
 	private static boolean isProperUnitTest(Class<?> clazz)
@@ -438,7 +456,7 @@ public class TestManager
 	}
 
 
-	public static ArrayList<Class<?>> getClassesForPackage(String path /*Package pkg*/) {
+	public static ArrayList<Class<?>> getClassesForPackage(String path /*Package pkg*/) throws ZipException, IOException {
 		ArrayList<Class<?>> classes = new ArrayList<Class<?>>();
 
 		//String pkgname = pkg.getName();
@@ -447,10 +465,11 @@ public class TestManager
 		//Lowercased Mendix Module names equals their package names
 		String pkgname = path.toLowerCase();
 
-		// Get a File object for the package
-		File basedir = new File(Core.getConfiguration().getBasePath() + File.separator + "run" +  File.separator + "bin" + File.separator + pkgname);
-		processDirectory(basedir, pkgname, classes);
-
+		// Get a File object containing the classes. This file is expected to be located at [deploymentdir]/model/bundles/project.jar
+		File projectjar = new File(Core.getConfiguration().getBasePath() + File.separator + "model" +  File.separator + "bundles"  +  File.separator   + "project.jar");
+		
+		processProjectJar(projectjar, pkgname, classes);
+		
 		return classes;
 	}
 
@@ -506,14 +525,17 @@ public class TestManager
 				test.commit();
 			}
 			
-			/*
-			 * Find Junit tests
-			 */
-			for (String jtest : findJUnitTests(testSuite)) { 
-				UnitTest test = getUnitTest(context, testSuite, jtest, false);
-				test.set_dirty(false);
-				test.setUnitTest_TestSuite(testSuite);
-				test.commit();
+			if(unittesting.proxies.constants.Constants.getFindJUnitTests())
+			{
+				/*
+				 * Find Junit tests
+				 */
+				for (String jtest : findJUnitTests(testSuite)) { 
+					UnitTest test = getUnitTest(context, testSuite, jtest, false);
+					test.set_dirty(false);
+					test.setUnitTest_TestSuite(testSuite);
+					test.commit();
+				}
 			}
 			
 			/*

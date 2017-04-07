@@ -4,9 +4,6 @@
 
 package system.proxies;
 
-/**
- * 
- */
 public class Image extends system.proxies.FileDocument
 {
 	/**
@@ -63,7 +60,7 @@ public class Image extends system.proxies.FileDocument
 
 	/**
 	 * Initialize a proxy using context (recommended). This context will be used for security checking when the get- and set-methods without context parameters are called.
-	 * The get- and set-methods with context parameter should be used when for instance sudo access is necessary (IContext.getSudoContext() can be used to obtain sudo access).
+	 * The get- and set-methods with context parameter should be used when for instance sudo access is necessary (IContext.createSudoClone() can be used to obtain sudo access).
 	 */
 	public static system.proxies.Image initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject mendixObject)
 	{
@@ -87,7 +84,7 @@ public class Image extends system.proxies.FileDocument
 	/**
 	 * @return value of PublicThumbnailPath
 	 */
-	public final String getPublicThumbnailPath()
+	public final java.lang.String getPublicThumbnailPath()
 	{
 		return getPublicThumbnailPath(getContext());
 	}
@@ -96,16 +93,16 @@ public class Image extends system.proxies.FileDocument
 	 * @param context
 	 * @return value of PublicThumbnailPath
 	 */
-	public final String getPublicThumbnailPath(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getPublicThumbnailPath(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.PublicThumbnailPath.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.PublicThumbnailPath.toString());
 	}
 
 	/**
 	 * Set value of PublicThumbnailPath
 	 * @param publicthumbnailpath
 	 */
-	public final void setPublicThumbnailPath(String publicthumbnailpath)
+	public final void setPublicThumbnailPath(java.lang.String publicthumbnailpath)
 	{
 		setPublicThumbnailPath(getContext(), publicthumbnailpath);
 	}
@@ -115,7 +112,7 @@ public class Image extends system.proxies.FileDocument
 	 * @param context
 	 * @param publicthumbnailpath
 	 */
-	public final void setPublicThumbnailPath(com.mendix.systemwideinterfaces.core.IContext context, String publicthumbnailpath)
+	public final void setPublicThumbnailPath(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String publicthumbnailpath)
 	{
 		getMendixObject().setValue(context, MemberNames.PublicThumbnailPath.toString(), publicthumbnailpath);
 	}

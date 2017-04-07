@@ -20,28 +20,25 @@ import org.apache.commons.mail.HtmlEmail;
 import javax.mail.util.ByteArrayDataSource;
 import java.io.InputStream;
 
-/**
- * 
- */
-public class SendEmail extends CustomJavaAction<Boolean>
+public class SendEmail extends CustomJavaAction<java.lang.Boolean>
 {
-	private String To;
-	private String From;
-	private String ReplyTo;
-	private String Subject;
-	private String Contents;
-	private String Attachment;
-	private String AttachmentMimetype;
-	private String AttachmentFilename;
+	private java.lang.String To;
+	private java.lang.String From;
+	private java.lang.String ReplyTo;
+	private java.lang.String Subject;
+	private java.lang.String Contents;
+	private java.lang.String Attachment;
+	private java.lang.String AttachmentMimetype;
+	private java.lang.String AttachmentFilename;
 	private IMendixObject __AttachmentDocument;
 	private system.proxies.FileDocument AttachmentDocument;
-	private String SmtpHost;
-	private Long SmtpPort;
-	private String SmtpUsername;
-	private String SmtpPassword;
-	private Boolean UseSsl;
+	private java.lang.String SmtpHost;
+	private java.lang.Long SmtpPort;
+	private java.lang.String SmtpUsername;
+	private java.lang.String SmtpPassword;
+	private java.lang.Boolean UseSsl;
 
-	public SendEmail(IContext context, String To, String From, String ReplyTo, String Subject, String Contents, String Attachment, String AttachmentMimetype, String AttachmentFilename, IMendixObject AttachmentDocument, String SmtpHost, Long SmtpPort, String SmtpUsername, String SmtpPassword, Boolean UseSsl)
+	public SendEmail(IContext context, java.lang.String To, java.lang.String From, java.lang.String ReplyTo, java.lang.String Subject, java.lang.String Contents, java.lang.String Attachment, java.lang.String AttachmentMimetype, java.lang.String AttachmentFilename, IMendixObject AttachmentDocument, java.lang.String SmtpHost, java.lang.Long SmtpPort, java.lang.String SmtpUsername, java.lang.String SmtpPassword, java.lang.Boolean UseSsl)
 	{
 		super(context);
 		this.To = To;
@@ -61,7 +58,7 @@ public class SendEmail extends CustomJavaAction<Boolean>
 	}
 
 	@Override
-	public Boolean executeAction() throws Exception
+	public java.lang.Boolean executeAction() throws Exception
 	{
 		this.AttachmentDocument = __AttachmentDocument == null ? null : system.proxies.FileDocument.initialize(getContext(), __AttachmentDocument);
 
@@ -73,7 +70,7 @@ public class SendEmail extends CustomJavaAction<Boolean>
         HtmlEmail email = new HtmlEmail();
         email.setHostName(this.SmtpHost);
         email.setSmtpPort(this.SmtpPort.intValue());
-        if(!this.SmtpUsername.equals("") && !this.SmtpPassword.equals("")) {
+        if (!this.SmtpUsername.equals("") && !this.SmtpPassword.equals("")) {
             email.setAuthenticator(new DefaultAuthenticator(this.SmtpUsername, this.SmtpPassword));
         }
         email.setSSLOnConnect(this.UseSsl);
@@ -85,11 +82,11 @@ public class SendEmail extends CustomJavaAction<Boolean>
         email.setHtmlMsg(this.Contents);
         email.setTextMsg("Your email client does not support HTML messages");
         email.addTo(this.To);
-        if(this.Attachment != null && !this.Attachment.equals("") && !this.AttachmentMimetype.equals("")) {
+        if (this.Attachment != null && !this.Attachment.equals("") && !this.AttachmentMimetype.equals("")) {
             email.addPart(this.Attachment, this.AttachmentMimetype);
         }
-        if(this.AttachmentDocument != null && !this.AttachmentMimetype.equals("")){
-            InputStream is = Core.getFileDocumentContent(getContext(),this.__AttachmentDocument);
+        if (this.AttachmentDocument != null && !this.AttachmentMimetype.equals("")) {
+            InputStream is = Core.getFileDocumentContent(getContext(), this.__AttachmentDocument);
             email.attach(new ByteArrayDataSource(is, this.AttachmentMimetype),
                     this.AttachmentFilename, this.Subject,
                     EmailAttachment.ATTACHMENT);
@@ -105,7 +102,7 @@ public class SendEmail extends CustomJavaAction<Boolean>
 	 * Returns a string representation of this action
 	 */
 	@Override
-	public String toString()
+	public java.lang.String toString()
 	{
 		return "SendEmail";
 	}

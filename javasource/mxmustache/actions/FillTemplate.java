@@ -12,22 +12,19 @@ package mxmustache.actions;
 import com.mendix.core.Core;
 import com.mendix.logging.ILogNode;
 import com.mendix.systemwideinterfaces.core.IContext;
-import com.mendix.webui.CustomJavaAction;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
+import com.mendix.webui.CustomJavaAction;
 import mxmustache.template.MxObjectToHashmapConverter;
 import mxmustache.template.TemplateEngineJMustache;
 
-/**
- * 
- */
-public class FillTemplate extends CustomJavaAction<String>
+public class FillTemplate extends CustomJavaAction<java.lang.String>
 {
-	private String Template;
+	private java.lang.String Template;
 	private IMendixObject Data;
-	private Boolean RunMarkdown;
-	private Long NoObjectLevels;
+	private java.lang.Boolean RunMarkdown;
+	private java.lang.Long NoObjectLevels;
 
-	public FillTemplate(IContext context, String Template, IMendixObject Data, Boolean RunMarkdown, Long NoObjectLevels)
+	public FillTemplate(IContext context, java.lang.String Template, IMendixObject Data, java.lang.Boolean RunMarkdown, java.lang.Long NoObjectLevels)
 	{
 		super(context);
 		this.Template = Template;
@@ -37,7 +34,7 @@ public class FillTemplate extends CustomJavaAction<String>
 	}
 
 	@Override
-	public String executeAction() throws Exception
+	public java.lang.String executeAction() throws Exception
 	{
 		// BEGIN USER CODE
         ILogNode logger = Core.getLogger(FillTemplate.class.getName());
@@ -54,7 +51,7 @@ public class FillTemplate extends CustomJavaAction<String>
 	 * Returns a string representation of this action
 	 */
 	@Override
-	public String toString()
+	public java.lang.String toString()
 	{
 		return "FillTemplate";
 	}

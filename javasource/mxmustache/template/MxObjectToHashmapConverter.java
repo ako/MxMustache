@@ -120,6 +120,7 @@ public class MxObjectToHashmapConverter {
             }
             res.put(ma.getName().split("\\.")[1], ar);
         }
+        res.put("ID",view.getId().toLong());
 
         return res;
     }

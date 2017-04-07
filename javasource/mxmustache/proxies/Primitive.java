@@ -4,9 +4,6 @@
 
 package mxmustache.proxies;
 
-/**
- * 
- */
 public class Primitive
 {
 	private final com.mendix.systemwideinterfaces.core.IMendixObject primitiveMendixObject;
@@ -69,7 +66,7 @@ public class Primitive
 
 	/**
 	 * Initialize a proxy using context (recommended). This context will be used for security checking when the get- and set-methods without context parameters are called.
-	 * The get- and set-methods with context parameter should be used when for instance sudo access is necessary (IContext.getSudoContext() can be used to obtain sudo access).
+	 * The get- and set-methods with context parameter should be used when for instance sudo access is necessary (IContext.createSudoClone() can be used to obtain sudo access).
 	 */
 	public static mxmustache.proxies.Primitive initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject mendixObject)
 	{
@@ -168,7 +165,7 @@ public class Primitive
 	/**
 	 * @return value of StringValue
 	 */
-	public final String getStringValue()
+	public final java.lang.String getStringValue()
 	{
 		return getStringValue(getContext());
 	}
@@ -177,16 +174,16 @@ public class Primitive
 	 * @param context
 	 * @return value of StringValue
 	 */
-	public final String getStringValue(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getStringValue(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.StringValue.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.StringValue.toString());
 	}
 
 	/**
 	 * Set value of StringValue
 	 * @param stringvalue
 	 */
-	public final void setStringValue(String stringvalue)
+	public final void setStringValue(java.lang.String stringvalue)
 	{
 		setStringValue(getContext(), stringvalue);
 	}
@@ -196,7 +193,7 @@ public class Primitive
 	 * @param context
 	 * @param stringvalue
 	 */
-	public final void setStringValue(com.mendix.systemwideinterfaces.core.IContext context, String stringvalue)
+	public final void setStringValue(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String stringvalue)
 	{
 		getMendixObject().setValue(context, MemberNames.StringValue.toString(), stringvalue);
 	}
@@ -240,7 +237,7 @@ public class Primitive
 	/**
 	 * @return value of BooleanValue
 	 */
-	public final Boolean getBooleanValue()
+	public final java.lang.Boolean getBooleanValue()
 	{
 		return getBooleanValue(getContext());
 	}
@@ -249,16 +246,16 @@ public class Primitive
 	 * @param context
 	 * @return value of BooleanValue
 	 */
-	public final Boolean getBooleanValue(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.Boolean getBooleanValue(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (Boolean) getMendixObject().getValue(context, MemberNames.BooleanValue.toString());
+		return (java.lang.Boolean) getMendixObject().getValue(context, MemberNames.BooleanValue.toString());
 	}
 
 	/**
 	 * Set value of BooleanValue
 	 * @param booleanvalue
 	 */
-	public final void setBooleanValue(Boolean booleanvalue)
+	public final void setBooleanValue(java.lang.Boolean booleanvalue)
 	{
 		setBooleanValue(getContext(), booleanvalue);
 	}
@@ -268,7 +265,7 @@ public class Primitive
 	 * @param context
 	 * @param booleanvalue
 	 */
-	public final void setBooleanValue(com.mendix.systemwideinterfaces.core.IContext context, Boolean booleanvalue)
+	public final void setBooleanValue(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Boolean booleanvalue)
 	{
 		getMendixObject().setValue(context, MemberNames.BooleanValue.toString(), booleanvalue);
 	}

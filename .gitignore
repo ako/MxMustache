@@ -51,3 +51,8 @@ deployment
 *.iml
 *.lock
 *.bak
+
+userlib
+DIST/*
+*.bak
+*.lock

@@ -1,0 +1,12 @@
+<ivysettings>
+    <settings defaultResolver="central"/>
+    <resolvers>
+        <ibiblio name="central" m2compatible="true"/>
+        <filesystem name="local">
+            <artifact pattern="${ivy.settings.dir}/userlib-repo/[artifact]-[revision].[ext]"/>
+        </filesystem>
+    </resolvers>
+    <modules>
+        <module name="jmustache" resolver="local"/>
+    </modules>
+</ivysettings>

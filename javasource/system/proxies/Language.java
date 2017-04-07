@@ -4,9 +4,6 @@
 
 package system.proxies;
 
-/**
- * 
- */
 public class Language
 {
 	private final com.mendix.systemwideinterfaces.core.IMendixObject languageMendixObject;
@@ -67,7 +64,7 @@ public class Language
 
 	/**
 	 * Initialize a proxy using context (recommended). This context will be used for security checking when the get- and set-methods without context parameters are called.
-	 * The get- and set-methods with context parameter should be used when for instance sudo access is necessary (IContext.getSudoContext() can be used to obtain sudo access).
+	 * The get- and set-methods with context parameter should be used when for instance sudo access is necessary (IContext.createSudoClone() can be used to obtain sudo access).
 	 */
 	public static system.proxies.Language initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject mendixObject)
 	{
@@ -122,7 +119,7 @@ public class Language
 	/**
 	 * @return value of Code
 	 */
-	public final String getCode()
+	public final java.lang.String getCode()
 	{
 		return getCode(getContext());
 	}
@@ -131,16 +128,16 @@ public class Language
 	 * @param context
 	 * @return value of Code
 	 */
-	public final String getCode(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getCode(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.Code.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.Code.toString());
 	}
 
 	/**
 	 * Set value of Code
 	 * @param code
 	 */
-	public final void setCode(String code)
+	public final void setCode(java.lang.String code)
 	{
 		setCode(getContext(), code);
 	}
@@ -150,7 +147,7 @@ public class Language
 	 * @param context
 	 * @param code
 	 */
-	public final void setCode(com.mendix.systemwideinterfaces.core.IContext context, String code)
+	public final void setCode(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String code)
 	{
 		getMendixObject().setValue(context, MemberNames.Code.toString(), code);
 	}
@@ -158,7 +155,7 @@ public class Language
 	/**
 	 * @return value of Description
 	 */
-	public final String getDescription()
+	public final java.lang.String getDescription()
 	{
 		return getDescription(getContext());
 	}
@@ -167,16 +164,16 @@ public class Language
 	 * @param context
 	 * @return value of Description
 	 */
-	public final String getDescription(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getDescription(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.Description.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.Description.toString());
 	}
 
 	/**
 	 * Set value of Description
 	 * @param description
 	 */
-	public final void setDescription(String description)
+	public final void setDescription(java.lang.String description)
 	{
 		setDescription(getContext(), description);
 	}
@@ -186,7 +183,7 @@ public class Language
 	 * @param context
 	 * @param description
 	 */
-	public final void setDescription(com.mendix.systemwideinterfaces.core.IContext context, String description)
+	public final void setDescription(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String description)
 	{
 		getMendixObject().setValue(context, MemberNames.Description.toString(), description);
 	}
