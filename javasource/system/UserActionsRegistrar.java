@@ -18,6 +18,7 @@ public class UserActionsRegistrar
     registrator.registerUserAction(mxlists.actions.GenerateDateTimeSeries.class);
     registrator.registerUserAction(mxlists.actions.GenerateLongSeries.class);
     registrator.registerUserAction(mxmustache.actions.FillTemplate.class);
+    registrator.registerUserAction(mxmustache.actions.FillTemplateFromJson.class);
     registrator.registerUserAction(mxmustache.actions.FillTemplateFromMappingToFileDocument.class);
     registrator.registerUserAction(mxmustache.actions.FillTemplateToFileDocument.class);
     registrator.registerUserAction(mxmustache.actions.SendEmail.class);

@@ -16,19 +16,17 @@ import com.mendix.webui.CustomJavaAction;
 public class FillTemplateFromMappingToFileDocument extends CustomJavaAction<java.lang.Boolean>
 {
 	private java.lang.String Template;
-	private IMendixObject Data;
+	private java.lang.String JsonData;
 	private java.lang.Boolean RunMarkdown;
-	private java.lang.String JsonExportMapping;
 	private IMendixObject __DestinationFile;
 	private system.proxies.FileDocument DestinationFile;
 
-	public FillTemplateFromMappingToFileDocument(IContext context, java.lang.String Template, IMendixObject Data, java.lang.Boolean RunMarkdown, java.lang.String JsonExportMapping, IMendixObject DestinationFile)
+	public FillTemplateFromMappingToFileDocument(IContext context, java.lang.String Template, java.lang.String JsonData, java.lang.Boolean RunMarkdown, IMendixObject DestinationFile)
 	{
 		super(context);
 		this.Template = Template;
-		this.Data = Data;
+		this.JsonData = JsonData;
 		this.RunMarkdown = RunMarkdown;
-		this.JsonExportMapping = JsonExportMapping;
 		this.__DestinationFile = DestinationFile;
 	}
 

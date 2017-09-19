@@ -56,3 +56,5 @@ userlib
 DIST/*
 *.bak
 *.lock
+.gradle
+.classpath
