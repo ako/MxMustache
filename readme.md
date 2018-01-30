@@ -127,7 +127,11 @@ You can find an example microflow on [Mendix model share][9]: [Test xml template
 
 ## History
 
- * 0.0.1 - Initial release
+ * 0.1
+    * Initial release
+ * 0.2
+    * New action to fill template using json string
+    * Migrated project to Mendix 7.6
  
  [1]: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
  [2]: https://github.com/samskivert/jmustache

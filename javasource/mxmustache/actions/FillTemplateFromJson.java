@@ -22,15 +22,15 @@ public class FillTemplateFromJson extends CustomJavaAction<java.lang.String>
 	private java.lang.String Template;
 	private java.lang.String JsonData;
 	private java.lang.Boolean RunMarkdown;
-	private java.lang.Long NoObjectLevels;
+	private java.lang.String DefaultValue;
 
-	public FillTemplateFromJson(IContext context, java.lang.String Template, java.lang.String JsonData, java.lang.Boolean RunMarkdown, java.lang.Long NoObjectLevels)
+	public FillTemplateFromJson(IContext context, java.lang.String Template, java.lang.String JsonData, java.lang.Boolean RunMarkdown, java.lang.String DefaultValue)
 	{
 		super(context);
 		this.Template = Template;
 		this.JsonData = JsonData;
 		this.RunMarkdown = RunMarkdown;
-		this.NoObjectLevels = NoObjectLevels;
+		this.DefaultValue = DefaultValue;
 	}
 
 	@Override
@@ -41,19 +41,10 @@ public class FillTemplateFromJson extends CustomJavaAction<java.lang.String>
         logger.info("executeAction: " + this.JsonData + ", " + this.Template);
         try {
             TemplateEngineJMustache te = new TemplateEngineJMustache();
-//			InputStream is = Core.integration().exportToStream(getContext(), this.JsonExportMapping, this.Data, true);
-//			String json = new BufferedReader(new InputStreamReader(is))
-//					.lines().collect(Collectors.joining("\n"));
-//			logger.info(json);
-//			is.close();
-
             HashMap<String, Object> jsonData =
                     new ObjectMapper().readValue(JsonData, HashMap.class);
-
-
-            //Object o = MxObjectToHashmapConverter.writeMxObjectToHashMap(this.getContext(), this.Data, NoObjectLevels.intValue());
             logger.info("data: " + jsonData);
-            String result = te.execute(this.Template, jsonData, this.RunMarkdown);
+            String result = te.execute(this.Template, jsonData, this.RunMarkdown, this.DefaultValue);
             return result;
         } catch (Exception e) {
             logger.error(e);

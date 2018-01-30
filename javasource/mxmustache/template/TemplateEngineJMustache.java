@@ -21,7 +21,7 @@ public class TemplateEngineJMustache {
     private static ILogNode logger = Core.getLogger(TemplateEngineJMustache.class.getName());
     public static final String UTF8 = "UTF-8";
 
-    public String execute(String template, Object data, Boolean runMarkdown) throws IOException {
+    public String execute(String template, Object data, Boolean runMarkdown, String defaultValue) throws IOException {
         logger.info("template: " + template);
         logger.info("templateData: " + data);
         Template tmpl = Mustache.compiler().
@@ -54,7 +54,7 @@ public class TemplateEngineJMustache {
                     protected DateFormat _fmt = new SimpleDateFormat("yyyy/MM/dd");
 
                 }).
-                nullValue("<null>").
+                defaultValue(defaultValue).
                 compile(template);
         String resultMd = tmpl.execute(data);
         String result = null;

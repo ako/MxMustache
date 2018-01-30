@@ -1,6 +1,6 @@
 /* use:
- * Download all dependencies - \programs\gradle-3.5\bin\gradle getTestRuntimeLibs
- * Download just the export dependencies -  \programs\gradle-3.5\bin\gradle getExportLibs
+ * Download all dependencies - \programs\gradle-4.4.1\bin\gradle getTestRuntimeLibs
+ * Download just the export dependencies -  \programs\gradle-4.4.1\bin\gradle getExportLibs
  */
 
 apply plugin: 'java'
@@ -38,7 +38,7 @@ dependencies {
     testRuntime 'org.apache.commons:commons-lang3:3.6'
     testRuntime 'org.apache.httpcomponents:httpclient:4.4.1'
     testRuntime 'org.apache.httpcomponents:httpcore:4.4.1'
-    testRuntime 'com.fasterxml.jackson.core:jackson-databind:2.9.1'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.9.1'
     compile 'com.google.guava:guava:23.0'
 
 }

@@ -50,10 +50,10 @@ public class FillTemplateToFileDocument extends CustomJavaAction<java.lang.Boole
         TemplateEngineJMustache te = new TemplateEngineJMustache();
         Object o = MxObjectToHashmapConverter.writeMxObjectToHashMap(this.getContext(), this.Data, NoObjectLevels.intValue());
         logger.info("data: " + o);
-        String result = te.execute(this.Template, o, this.RunMarkdown);
+        String result = te.execute(this.Template, o, this.RunMarkdown, "");
         logger.info("result: " + result);
         InputStream is = new ByteArrayInputStream(result.getBytes(StandardCharsets.UTF_8));
-		Core.storeFileDocumentContent(getContext(),this.__DestinationFile,is);
+        Core.storeFileDocumentContent(getContext(), this.__DestinationFile, is);
         is.close();
         return true;
 		// END USER CODE

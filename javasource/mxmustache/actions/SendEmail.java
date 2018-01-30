@@ -23,6 +23,8 @@ import java.io.InputStream;
 public class SendEmail extends CustomJavaAction<java.lang.Boolean>
 {
 	private java.lang.String To;
+	private java.lang.String CC;
+	private java.lang.String Bcc;
 	private java.lang.String From;
 	private java.lang.String ReplyTo;
 	private java.lang.String Subject;
@@ -38,10 +40,12 @@ public class SendEmail extends CustomJavaAction<java.lang.Boolean>
 	private java.lang.String SmtpPassword;
 	private java.lang.Boolean UseSsl;
 
-	public SendEmail(IContext context, java.lang.String To, java.lang.String From, java.lang.String ReplyTo, java.lang.String Subject, java.lang.String Contents, java.lang.String Attachment, java.lang.String AttachmentMimetype, java.lang.String AttachmentFilename, IMendixObject AttachmentDocument, java.lang.String SmtpHost, java.lang.Long SmtpPort, java.lang.String SmtpUsername, java.lang.String SmtpPassword, java.lang.Boolean UseSsl)
+	public SendEmail(IContext context, java.lang.String To, java.lang.String CC, java.lang.String Bcc, java.lang.String From, java.lang.String ReplyTo, java.lang.String Subject, java.lang.String Contents, java.lang.String Attachment, java.lang.String AttachmentMimetype, java.lang.String AttachmentFilename, IMendixObject AttachmentDocument, java.lang.String SmtpHost, java.lang.Long SmtpPort, java.lang.String SmtpUsername, java.lang.String SmtpPassword, java.lang.Boolean UseSsl)
 	{
 		super(context);
 		this.To = To;
+		this.CC = CC;
+		this.Bcc = Bcc;
 		this.From = From;
 		this.ReplyTo = ReplyTo;
 		this.Subject = Subject;
@@ -82,6 +86,12 @@ public class SendEmail extends CustomJavaAction<java.lang.Boolean>
         email.setHtmlMsg(this.Contents);
         email.setTextMsg("Your email client does not support HTML messages");
         email.addTo(this.To);
+        if (!this.CC.equals("")) {
+            email.addCc(this.CC);
+        }
+        if (!this.Bcc.equals("")) {
+            email.addBcc(this.Bcc);
+        }
         if (this.Attachment != null && !this.Attachment.equals("") && !this.AttachmentMimetype.equals("")) {
             email.addPart(this.Attachment, this.AttachmentMimetype);
         }

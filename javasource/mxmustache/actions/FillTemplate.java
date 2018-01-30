@@ -42,7 +42,7 @@ public class FillTemplate extends CustomJavaAction<java.lang.String>
         TemplateEngineJMustache te = new TemplateEngineJMustache();
         Object o = MxObjectToHashmapConverter.writeMxObjectToHashMap(this.getContext(), this.Data, NoObjectLevels.intValue());
         logger.info("data: " + o);
-        String result = te.execute(this.Template, o, this.RunMarkdown);
+        String result = te.execute(this.Template, o, this.RunMarkdown, "");
         return result;
 		// END USER CODE
 	}
