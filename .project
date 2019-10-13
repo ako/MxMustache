@@ -16,7 +16,7 @@
 			<arguments>
 				<dictionary>
 					<key>LaunchConfigHandle</key>
-					<value>&lt;project&gt;/deployment/run/bndbuild.launch</value>
+					<value>&lt;project&gt;/deployment/run/componentbuild.launch</value>
 				</dictionary>
 			</arguments>
 		</buildCommand>

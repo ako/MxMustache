@@ -20,22 +20,25 @@ public class StartSmtpMock extends CustomJavaAction<java.lang.Boolean>
 		super(context);
 	}
 
-	@Override
+	@java.lang.Override
 	public java.lang.Boolean executeAction() throws Exception
 	{
 		// BEGIN USER CODE
-		//throw new com.mendix.systemwideinterfaces.MendixRuntimeException("Java action was not implemented");
-		Wiser wiser = new Wiser();
-		wiser.setPort(2500); // Default is 25
-		wiser.start();
-		return true;
+        try {
+            Wiser wiser = new Wiser();
+            wiser.setPort(2500); // Default is 25
+            wiser.start();
+        } catch (Exception e) {
+            // assume its running
+        }
+        return true;
 		// END USER CODE
 	}
 
 	/**
 	 * Returns a string representation of this action
 	 */
-	@Override
+	@java.lang.Override
 	public java.lang.String toString()
 	{
 		return "StartSmtpMock";

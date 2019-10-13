@@ -1,20 +1,21 @@
 package system;
 
-import aQute.bnd.annotation.component.Component;
-import aQute.bnd.annotation.component.Reference;
-
 import com.mendix.core.actionmanagement.IActionRegistrator;
 
-@Component(immediate = true)
 public class UserActionsRegistrar
 {
-  @Reference
   public void registerActions(IActionRegistrator registrator)
   {
     registrator.bundleComponentLoaded();
-    registrator.registerUserAction(appcloudservices.actions.GenerateRandomPassword.class);
-    registrator.registerUserAction(appcloudservices.actions.LogOutUser.class);
-    registrator.registerUserAction(appcloudservices.actions.StartSignOnServlet.class);
+    registrator.registerUserAction(mendixsso.actions.CreateUserWithUserProfile.class);
+    registrator.registerUserAction(mendixsso.actions.DecryptString.class);
+    registrator.registerUserAction(mendixsso.actions.EncryptString.class);
+    registrator.registerUserAction(mendixsso.actions.GenerateRandomPassword.class);
+    registrator.registerUserAction(mendixsso.actions.GetTokenEndpointURI.class);
+    registrator.registerUserAction(mendixsso.actions.InitializeUserMapper.class);
+    registrator.registerUserAction(mendixsso.actions.LogOutUser.class);
+    registrator.registerUserAction(mendixsso.actions.StartSignOnServlet.class);
+    registrator.registerUserAction(mendixsso.actions.UpdateUserWithUserProfile.class);
     registrator.registerUserAction(mxlists.actions.GenerateDateTimeSeries.class);
     registrator.registerUserAction(mxlists.actions.GenerateLongSeries.class);
     registrator.registerUserAction(mxmustache.actions.FillTemplate.class);

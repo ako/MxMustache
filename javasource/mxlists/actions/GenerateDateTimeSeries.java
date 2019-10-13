@@ -39,7 +39,7 @@ public class GenerateDateTimeSeries extends CustomJavaAction<java.util.List<IMen
 		this.IntervalUnit = IntervalUnit == null ? null : mxlists.proxies.DateTimeIntervalEnum.valueOf(IntervalUnit);
 	}
 
-	@Override
+	@java.lang.Override
 	public java.util.List<IMendixObject> executeAction() throws Exception
 	{
 		// BEGIN USER CODE
@@ -95,7 +95,7 @@ public class GenerateDateTimeSeries extends CustomJavaAction<java.util.List<IMen
 	/**
 	 * Returns a string representation of this action
 	 */
-	@Override
+	@java.lang.Override
 	public java.lang.String toString()
 	{
 		return "GenerateDateTimeSeries";

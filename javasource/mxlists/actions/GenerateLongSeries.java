@@ -29,7 +29,7 @@ public class GenerateLongSeries extends CustomJavaAction<java.util.List<IMendixO
 		this.Interval = Interval;
 	}
 
-	@Override
+	@java.lang.Override
 	public java.util.List<IMendixObject> executeAction() throws Exception
 	{
 		// BEGIN USER CODE
@@ -46,7 +46,7 @@ public class GenerateLongSeries extends CustomJavaAction<java.util.List<IMendixO
 	/**
 	 * Returns a string representation of this action
 	 */
-	@Override
+	@java.lang.Override
 	public java.lang.String toString()
 	{
 		return "GenerateLongSeries";

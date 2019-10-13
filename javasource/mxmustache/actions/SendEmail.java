@@ -61,7 +61,7 @@ public class SendEmail extends CustomJavaAction<java.lang.Boolean>
 		this.UseSsl = UseSsl;
 	}
 
-	@Override
+	@java.lang.Override
 	public java.lang.Boolean executeAction() throws Exception
 	{
 		this.AttachmentDocument = __AttachmentDocument == null ? null : system.proxies.FileDocument.initialize(getContext(), __AttachmentDocument);
@@ -86,13 +86,14 @@ public class SendEmail extends CustomJavaAction<java.lang.Boolean>
         email.setHtmlMsg(this.Contents);
         email.setTextMsg("Your email client does not support HTML messages");
         email.addTo(this.To);
-        if (!this.CC.equals("")) {
+        if (this.CC != null && !this.CC.equals("")) {
             email.addCc(this.CC);
         }
-        if (!this.Bcc.equals("")) {
+        if (this.Bcc != null && !this.Bcc.equals("")) {
             email.addBcc(this.Bcc);
         }
-        if (this.Attachment != null && !this.Attachment.equals("") && !this.AttachmentMimetype.equals("")) {
+        if (this.Attachment != null && !this.Attachment.equals("")
+				&& this.AttachmentMimetype != null && !this.AttachmentMimetype.equals("")) {
             email.addPart(this.Attachment, this.AttachmentMimetype);
         }
         if (this.AttachmentDocument != null && !this.AttachmentMimetype.equals("")) {
@@ -111,7 +112,7 @@ public class SendEmail extends CustomJavaAction<java.lang.Boolean>
 	/**
 	 * Returns a string representation of this action
 	 */
-	@Override
+	@java.lang.Override
 	public java.lang.String toString()
 	{
 		return "SendEmail";

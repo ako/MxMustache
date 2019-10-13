@@ -30,7 +30,7 @@ public class FillTemplateFromMappingToFileDocument extends CustomJavaAction<java
 		this.__DestinationFile = DestinationFile;
 	}
 
-	@Override
+	@java.lang.Override
 	public java.lang.Boolean executeAction() throws Exception
 	{
 		this.DestinationFile = __DestinationFile == null ? null : system.proxies.FileDocument.initialize(getContext(), __DestinationFile);
@@ -43,7 +43,7 @@ public class FillTemplateFromMappingToFileDocument extends CustomJavaAction<java
 	/**
 	 * Returns a string representation of this action
 	 */
-	@Override
+	@java.lang.Override
 	public java.lang.String toString()
 	{
 		return "FillTemplateFromMappingToFileDocument";

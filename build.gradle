@@ -6,47 +6,49 @@
 apply plugin: 'java'
 
 configurations {
-    compile {}
-    export {
-        extendsFrom compile
-    }
+    exportMxMustache { }
+    export { extendsFrom exportMxMustache }
+    compile { extendsFrom export }
 }
 compileJava.destinationDir = file("$rootDir/deployment/run/bin")
 
 dependencies {
     // public mendix runtime jars
-    testRuntime name: 'com.mendix.public-api'
-    testRuntime name: 'com.mendix.json'
-    testRuntime name: 'com.mendix.logging-api'
-    testRuntime name: 'com.mendix.m2ee-api'
-    testRuntime name: 'javax.servlet'
-    testRuntime name: 'biz.aQute.bnd.bndlib'
+    compile name: 'com.mendix.public-api'
+    compile name: 'com.mendix.json'
+    compile name: 'com.mendix.logging-api'
+    compile name: 'com.mendix.m2ee-api'
+    compile name: 'javax.servlet-api.servlet'
+
+    // mx mustache
+    exportMxMustache 'org.parboiled:parboiled-java:1.1.7'
+    exportMxMustache 'org.apache.commons:commons-email:1.4'
+    exportMxMustache 'org.pegdown:pegdown:1.6.0'
+    testRuntime 'org.subethamail:subethasmtp-wiser:1.2'
+    exportMxMustache 'com.samskivert:jmustache:1.14-SNAPSHOT'
+
     // unit test module
     testRuntime 'junit:junit:4.12'
-    // for appcloudservices
-    testRuntime 'org.openid4java:openid4java:1.0.0'
-    testRuntime 'commons-lang:commons-lang:2.5'
-    testRuntime 'org.apache.ws.commons.axiom:axiom-api:1.2.19'
-    // jmustache
-    export 'org.parboiled:parboiled-java:1.1.7'
-    export 'org.apache.commons:commons-email:1.4'
-    export 'org.pegdown:pegdown:1.6.0'
-    testRuntime 'org.subethamail:subethasmtp-wiser:1.2'
-    export 'com.samskivert:jmustache:1.14-SNAPSHOT'
-// object handling
-    testRuntime 'commons-io:commons-io:2.3'
-    testRuntime 'org.apache.commons:commons-lang3:3.6'
-    testRuntime 'org.apache.httpcomponents:httpclient:4.4.1'
-    testRuntime 'org.apache.httpcomponents:httpcore:4.4.1'
-    compile 'com.fasterxml.jackson.core:jackson-databind:2.9.1'
-    compile 'com.google.guava:guava:23.0'
+
+    // Mendix SSO
+    testRuntime 'com.nimbusds:oauth2-oidc-sdk:6.14'
+    testRuntime 'org.apache.commons:commons-lang3:3.9'
+    testRuntime 'org.apache.commons:commons-text:1.8'
+
+    // object handling
+//    testRuntime 'commons-io:commons-io:2.3'
+//    testRuntime 'org.apache.commons:commons-lang3:3.6'
+//    testRuntime 'org.apache.httpcomponents:httpclient:4.4.1'
+//    testRuntime 'org.apache.httpcomponents:httpcore:4.4.1'
+//    compile 'com.fasterxml.jackson.core:jackson-databind:2.9.1'
+//    compile 'com.google.guava:guava:23.0'
 
 }
 
 repositories {
     mavenCentral()
     flatDir {
-        dirs '/c://Program Files/Mendix/7.6.0/runtime/bundles', 'userlib-repo'
+        dirs '/c://Program Files/Mendix/7.23.8.58888/runtime/bundles', 'userlib-repo'
     }
 }
 
@@ -65,7 +67,7 @@ task getExportlibs(type: Copy) {
     doFirst {
         delete fileTree(dir: "userlib")
     }
-    from configurations.export
+    from configurations.exportMxMustache
     into 'userlib/'
     doLast {
         files { file('userlib').listFiles() }.each { File file ->
@@ -77,6 +79,10 @@ task getExportlibs(type: Copy) {
 }
 
 task getTestRuntimelibs(type: Copy) {
-    from configurations.testRuntime
+    from configurations.compile
     into 'userlib/'
+}
+
+task exportModule(type: Exec){
+    commandLine "\\Program Files\\Mendix\\7.23.8.58888\\modeler\\mxutil.exe", "create-module-package", "MxMustache.mpr", "MxMustache", "--package-dir=DIST"
 }

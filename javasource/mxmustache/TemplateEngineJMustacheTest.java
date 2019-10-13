@@ -24,7 +24,7 @@ public class TemplateEngineJMustacheTest {
             HashMap map = new HashMap();
             map.put("a", "xyz");
 
-            String result = engine.execute(template, map, false);
+            String result = engine.execute(template, map, false,"<null>");
             if (!result.equals("xyz")) fail();
 
         } catch (Exception e) {
