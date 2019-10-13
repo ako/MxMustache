@@ -54,7 +54,7 @@ public class TemplateEngineJMustache {
                     protected DateFormat _fmt = new SimpleDateFormat("yyyy/MM/dd");
 
                 }).
-                defaultValue("<unknown>").
+                defaultValue(defaultValue).
                 nullValue("<null>").
                 compile(template);
         String resultMd = tmpl.execute(data);
