@@ -61,4 +61,5 @@ DIST/*
 .classpath
 
 theme_old
+*.mpk
 
